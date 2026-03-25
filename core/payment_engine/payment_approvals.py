@@ -1,6 +1,7 @@
 from database import db
 from functions.user_logs import log_applicant_track
 from core.auth.account_checker import account_checker
+from functions.form_sanitizer import sanitize_input
 from datetime import datetime
 
 VALID_STATUS = ['APPROVED', 'REJECTED']
@@ -37,7 +38,7 @@ def review_payment_request(officer_id, request_id, status, comments):
             payment_request.status = 'APPROVED'
             payment_request.is_approved = True
             payment_request.approved_by = officer_id
-            payment_request.comments = comments
+            payment_request.comments = sanitize_input(comments)
 
             trench.status = 'APPROVED'
 
@@ -46,7 +47,7 @@ def review_payment_request(officer_id, request_id, status, comments):
             payment_request.status = 'REJECTED'
             payment_request.is_approved = False
             payment_request.approved_by = officer_id
-            payment_request.comments = comments
+            payment_request.comments = sanitize_input(comments)
 
             #reset trench so it can be requested again
             trench.status = 'PENDING'
