@@ -7,10 +7,10 @@ from zoneinfo import ZoneInfo
 from functions.time_zone_fix import local_now
 
 """
-Employee User
+Finance Officer User
 """
 
-class Employee(db.Model, UserMixin):
+class FinanceOfficer(db.Model, UserMixin):
     id = db.Column(db.String, primary_key=True)
     first_name = db.Column(db.String)
     last_name = db.Column(db.String)

@@ -1,6 +1,11 @@
 from core.auth.account_checker import account_checker
 from database import db
 from functions.user_logs import log_applicant_track
+from models.admin import Admin
+from models.employee import Employee
+from models.officer import FinanceOfficer
+from models.monitor import Monitor
+from models.applicant import Applicant
 
 def delete_user(admin_id, user_id):
     try:
@@ -9,7 +14,7 @@ def delete_user(admin_id, user_id):
 
         user = (
             Applicant.query.filter_by(id=user_id).first() or
-            ADMIN.query.filter_by(id=user_id).first() or
+            Admin.query.filter_by(id=user_id).first() or
             Employee.query.filter_by(id=user_id).first() or
             FinanceOfficer.query.filter_by(id=user_id).first() or 
             Monitor.query.filter_by(id=user_id).first()

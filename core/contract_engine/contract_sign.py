@@ -2,6 +2,8 @@ from database import db
 from models.contract import ContractAgreement, ContractSignature
 from functions.user_logs import log_applicant_track
 from functions.form_sanitizer import sanitize_input
+from core.auth.account_checker import account_checker
+from models.officer import FinanceOfficer
 
 def applicant_sign_contract(contract_id, signer_name, signer_email, signature_data):
     """

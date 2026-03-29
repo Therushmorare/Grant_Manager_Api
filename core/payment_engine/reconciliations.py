@@ -4,6 +4,10 @@ from functions.form_sanitizer import sanitize_input
 from core.auth.account_checker import account_checker
 from datetime import datetime
 import uuid
+from models.trench import TrenchPlan
+from models.inspection import Inspection
+from models.journal import TransactionJournal
+from models.payment_request import PaymentRequest
 
 def payment_reconciliation(officer_id, trench_id, visit_id, comments):
     try:

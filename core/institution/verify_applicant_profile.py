@@ -1,6 +1,11 @@
 from functions.user_logs import log_applicant_track
 from database import db
 from datetime import datetime
+from models.employee import Employee
+from models.applicant_profile import ApplicantProfile
+from models.contact_person import ContactPersons
+from models.banking import BankAccounts
+from models.documents import ApplicantDocuments
 
 VALID_MANAGER_STATUSES = ['VERIFIED', 'BLOCKED']
 

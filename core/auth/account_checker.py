@@ -1,3 +1,9 @@
+from models.admin import Admin
+from models.employee import Employee
+from models.applicant import Applicant
+from models.officer import FinanceOfficer
+from models.monitor import Monitor
+
 def account_checker(user_id):
     try:
         user = (

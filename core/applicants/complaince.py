@@ -3,6 +3,7 @@ from core.auth.account_checker import account_checker
 from functions.file_uploder import file_upload
 import uuid
 from functions.user_logs import log_applicant_track
+from models.documents import ApplicantDocuments
 
 VALID_DOC_TYPES = [
     'CIPC_Registration',

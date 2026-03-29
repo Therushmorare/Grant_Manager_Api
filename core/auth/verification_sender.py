@@ -8,8 +8,8 @@ from mail_util import mail
 from database import db
 from flask import jsonify
 from .email_sender import send_verification_email
-from models.applicant import ExternalApplicant, InternalApplicant
-from functions.string_sanitizer import escape_ldap_input
+from functions.form_sanitizer import sanitize_input
+from models.applicant import Applicant
 """
 Send verification code and verify it
 """    
@@ -28,12 +28,11 @@ def verify_token(user_email, token):
             return {"message": "Email and OTP token are required"}, 400
 
         # Sanitize input
-        safe_email = escape_ldap_input(user_email)
+        safe_email = sanitize_input(user_email)
         user_otp = str(token).strip()
 
         # Look for user in both tables
-        user = ExternalApplicant.query.filter_by(email=safe_email).first() or \
-               InternalApplicant.query.filter_by(email=safe_email).first()
+        user = Applicant.query.filter_by(email=safe_email).first()
 
         # Generic error message to prevent user enumeration
         if not user:

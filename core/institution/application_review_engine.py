@@ -1,6 +1,11 @@
 from core.auth.account_checker import account_checker
 from database import db
 from functions.user_logs import log_applicant_track
+from models.employee import Employee
+from models.applications import Applications
+from models.rating import ApplicationRating
+from core.auth.account_checker import account_checker
+from models.funding import Funding
 
 #Approves application
 VALID_MANAGER_RATINGS = [1, 2, 3, 4, 5]
@@ -79,11 +84,7 @@ VALID_FINANCE_STATUSES = ['APPROVED', 'REJECTED']
 def finance_review_engine(officer_id, applicant_id, application_id, status, notes):
     try:
         #Validate finance officer
-        officer = FinanceOfficer.query.filter_by(
-            id=officer_id
-        ).first()
-
-        if not officer:
+        if not account_checker(officer_id):
             return {'message': 'Finance officer not found'}, 404
 
         #Fetch application

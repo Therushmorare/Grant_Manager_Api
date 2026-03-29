@@ -4,6 +4,7 @@ import uuid
 from functions.form_sanitizer import sanitize_input
 from functions.user_logs import log_applicant_track
 from database import db
+from models.banking import BankAccounts
 
 def banking_details(applicant_id, bank_name, account_holder, account_number, branch_code, account_type):
     try:

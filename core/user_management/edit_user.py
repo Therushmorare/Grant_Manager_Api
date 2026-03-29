@@ -2,6 +2,11 @@ from database import db
 from core.auth.account_checker import account_checker
 from functions.form_sanitizer import sanitize_input
 from functions.user_logs import log_applicant_track
+from models.admin import Admin
+from models.employee import Employee
+from models.officer import FinanceOfficer
+from models.monitor import Monitor
+from models.applicant import Applicant
 
 USER_TYPES = ['ADMIN', 'SUPER_ADMIN', 'FINANCE_OFFICER', 'EMPLOYEE', 'MONITOR']
 
@@ -28,7 +33,7 @@ def edit_user(
         user = None
 
         if user_type in ['ADMIN', 'SUPER_ADMIN']:
-            user = ADMIN.query.filter_by(id=user_id).first()
+            user = Admin.query.filter_by(id=user_id).first()
 
         elif user_type == 'FINANCE_OFFICER':
             user = FinanceOfficer.query.filter_by(id=user_id).first()
@@ -44,7 +49,7 @@ def edit_user(
 
         if email and email != user.email:
             existing_user = (
-                ADMIN.query.filter_by(email=email).first() or
+                Admin.query.filter_by(email=email).first() or
                 FinanceOfficer.query.filter_by(email=email).first() or
                 Employee.query.filter_by(email=email).first() or
                 Monitor.query.filter_by(email=email).first()

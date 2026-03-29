@@ -4,6 +4,7 @@ from functions.form_sanitizer import sanitize_input
 from database import db
 from functions.user_logs import log_applicant_track
 from datetime import datetime
+from models.communique import Communique
 
 def send_users_communique(user_id, applicant_id, subject, message):
     try:
@@ -26,7 +27,6 @@ def send_users_communique(user_id, applicant_id, subject, message):
         message = sanitize_input(message.strip())
 
         message_id = str(uuid.uuid4())
-        now = datetime.utcnow()
 
         save_data = Communique(
             message_id=message_id,
@@ -36,7 +36,6 @@ def send_users_communique(user_id, applicant_id, subject, message):
             message=message,
             status='SENT',
             is_read=False,
-            created_at=now
         )
 
         db.session.add(save_data)
@@ -55,8 +54,7 @@ def send_users_communique(user_id, applicant_id, subject, message):
                 'sender_id': user_id,
                 'receiver_id': applicant_id,
                 'subject': subject,
-                'status': 'SENT',
-                'created_at': str(now)
+                'status': 'SENT'
             }
         }, 200
     

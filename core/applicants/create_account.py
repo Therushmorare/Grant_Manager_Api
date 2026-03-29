@@ -3,6 +3,8 @@ from database import db
 from functions.registration_number_validator import validate_cipc
 from functions.user_logs import log_applicant_track
 import uuid
+from core.auth.account_checker import account_checker
+from models.applicant_profile import ApplicantProfile
 
 def applicant_profile(
     applicant_id,
@@ -19,10 +21,8 @@ def applicant_profile(
     postal_code,
     country):
     try:
-        #Validate applicant first
-        applicant = Applicant.query.filter_by(id=applicant_id).first()
-
-        if not applicant:
+        #Validate applicant first        
+        if not account_checker(applicant_id):
             return {'message': 'Applicant does not exist'}, 404
 
         #Check if profile already exists

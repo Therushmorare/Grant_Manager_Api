@@ -4,6 +4,10 @@ from core.auth.account_checker import account_checker
 from functions.form_sanitizer import sanitize_input
 from datetime import datetime
 import uuid
+from models.applications import Applications
+from functions.time_zone_fix import local_now
+from datetime import datetime, timedelta, timezone
+from models.visit import SiteVisit
 
 """
 Monitor approved application via site visits
@@ -36,7 +40,7 @@ def schedule_visit(officer_id, application_id, date, time, location, assigned_to
         except ValueError:
             return {'message': 'Invalid date/time format. Use YYYY-MM-DD HH:MM'}, 400
         
-        if visit_datetime < datetime.utcnow():
+        if visit_datetime < datetime.now(timezone.utc):
             return {'message': 'Cannot schedule a visit in the past'}, 400
 
         visit_id = str(uuid.uuid4())

@@ -1,5 +1,8 @@
 from database import db
 from functions.user_logs import log_applicant_track
+from models.employee import Employee
+from models.funding_window import FundingWindow
+from models.requirements import Requirements, Categories
 
 """
 Delete funding window

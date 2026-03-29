@@ -3,6 +3,8 @@ from functions.user_logs import log_applicant_track
 from core.auth.account_checker import account_checker
 from functions.form_sanitizer import sanitize_input
 from datetime import datetime
+from models.trench import TrenchPlan
+from models.payment_request import PaymentRequest
 
 VALID_STATUS = ['APPROVED', 'REJECTED']
 

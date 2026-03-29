@@ -3,6 +3,8 @@ from core.auth.account_checker import account_checker
 from functions.file_uploder import file_upload
 from functions.user_logs import log_applicant_track
 import uuid
+from models.inspection import Inspection
+from models.visit import SiteVisit
 
 VISIT_STATUS = ['PASSES', 'FAILED']
 def site_inspection(monitor_id, visit_id, status, comments, evidence_docs):

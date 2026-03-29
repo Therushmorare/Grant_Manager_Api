@@ -6,13 +6,12 @@ from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 from functions.time_zone_fix import local_now
 
-class FundingWindow(db.Model):
+class TransactionJournal(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    funding_window_id = db.Column(db.String)
-    poster_id = db.Column(db.String)
-    name = db.Column(db.String)
-    description = db.Column(db.Text)
-    funding = db.Column(db.Double)
-    deadline = db.Column(db.String)
+    entry_id = db.Column(db.String)
+    trench_id = db.Column(db.String)
+    request_id = db.Column(db.String)
+    amount = db.Column(db.Double)
     status = db.Column(db.String)
+    statement = db.Column(db.Text)
     created_at = db.Column(DateTime(timezone=True), default=local_now)

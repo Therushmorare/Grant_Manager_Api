@@ -3,6 +3,9 @@ from datetime import datetime
 import uuid
 from database import db
 from functions.user_logs import log_applicant_track
+from models.requirements import Requirements, Categories
+from models.employee import Employee
+from models.funding_window import FundingWindow
 
 def create_funding_window(
     user_id,

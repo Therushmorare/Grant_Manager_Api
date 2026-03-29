@@ -2,10 +2,11 @@ from flask import Flask, render_template, request, url_for, redirect,send_from_d
 from database import db
 from datetime import datetime
 from models.logs import UserLogs
-from models.admin import AdminUser
-from models.asset_controller import AssetController
-from models.asset_manager import AssetManager
-from models.custodian import Custodian
+from models.admin import Admin
+from models.employee import Employee
+from models.officer import FinanceOfficer
+from models.monitor import Monitor
+from models.applicant import Applicant
 
 """
 Capture all user logs throughout the app
@@ -14,10 +15,12 @@ Capture all user logs throughout the app
 #user logs
 def log_applicant_track(user_id, user_type, action_type):
     try:
-        user = AdminUser.query.filter_by(admin_id=user_id).first() or \
-                AssetController.query.filter_by(controller_id=user_id).first() or \
-                AssetManager.query.filter_by(manager_id=user_id).first() or \
-                Custodian.query.filter_by(user_id=user_id).first()
+        user = Admin.query.filter_by(id=user_id).first() or \
+                Employee.query.filter_by(id=user_id).first() or \
+                FinanceOfficer.query.filter_by(id=user_id).first() or \
+                Monitor.query.filter_by(id=user_id).first() or \
+                Applicant.query.filter_by(id=user_id).first()
+
 
         if not user:
             raise ValueError(f"User {user_id} not found")

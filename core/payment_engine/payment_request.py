@@ -4,6 +4,9 @@ from functions.file_uploder import file_upload
 import uuid
 from datetime import datetime
 from functions.user_logs import log_applicant_track
+from models.trench import TrenchPlan
+from models.applications import Applications
+from models.payment_request import PaymentRequest
 
 def payment_request(applicant_id, trench_id, progress_report):
     try:

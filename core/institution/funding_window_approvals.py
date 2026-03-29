@@ -1,6 +1,9 @@
 from database import db
 from functions.user_logs import log_applicant_track
 from datetime import datetime
+from models.employee import Employee
+from models.admin import Admin
+from models.funding_window import FundingWindow
 """
 Funding Window approval workflows
 """

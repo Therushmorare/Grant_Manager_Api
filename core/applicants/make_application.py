@@ -5,6 +5,9 @@ import uuid
 from functions.file_uploder import file_upload
 from functions.user_logs import log_applicant_track
 from datetime import datetime
+from models.applicant_profile import ApplicantProfile
+from models.applications import Applications
+from models.funding_window import FundingWindow
 
 def make_application(
     applicant_id,

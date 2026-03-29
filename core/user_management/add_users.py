@@ -6,6 +6,10 @@ import uuid
 from extensions import bcrypt
 from functions.form_sanitizer import sanitize_input
 from functions.user_logs import log_applicant_track
+from models.admin import Admin
+from models.employee import Employee
+from models.officer import FinanceOfficer
+from models.monitor import Monitor
 
 USER_TYPES = ['ADMIN', 'SUPER_ADMIN', 'FINANCE_OFFICER', 'EMPLOYEE', 'MONITOR']
 VALID_ROLE = ['ADMIN', 'SUPER_ADMIN', 'FINANCE_OFFICER', 'EMPLOYEE', 'MONITOR', 'MANAGER']
@@ -22,7 +26,7 @@ def add_users(user_type, first_name, last_name, email, phone_number, role, depar
             return {'message': 'Select a valid user role'}, 400
 
         existing_user = (
-            ADMIN.query.filter_by(email=email).first() or
+            Admin.query.filter_by(email=email).first() or
             FinanceOfficer.query.filter_by(email=email).first() or
             Employee.query.filter_by(email=email).first() or
             Monitor.query.filter_by(email=email).first()
@@ -50,7 +54,7 @@ def add_users(user_type, first_name, last_name, email, phone_number, role, depar
         save_user = None
 
         if user_type in ['ADMIN', 'SUPER_ADMIN']:
-            save_user = ADMIN(
+            save_user = Admin(
                 id=user_id,
                 first_name=first_name,
                 last_name=last_name,
@@ -61,6 +65,7 @@ def add_users(user_type, first_name, last_name, email, phone_number, role, depar
                 employee_number=employee_number,
                 password=hash_password,
                 status='ACTIVE',
+                mfa_required=True,
                 is_verified=True,
                 is_active=True
             )
@@ -77,6 +82,7 @@ def add_users(user_type, first_name, last_name, email, phone_number, role, depar
                 employee_number=employee_number,
                 password=hash_password,
                 status='ACTIVE',
+                mfa_required=True,
                 is_verified=True,
                 is_active=True
             )
@@ -93,6 +99,7 @@ def add_users(user_type, first_name, last_name, email, phone_number, role, depar
                 employee_number=employee_number,
                 password=hash_password,
                 status='ACTIVE',
+                mfa_required=True,
                 is_verified=True,
                 is_active=True
             )
@@ -109,6 +116,7 @@ def add_users(user_type, first_name, last_name, email, phone_number, role, depar
                 employee_number=employee_number,
                 password=hash_password,
                 status='ACTIVE',
+                mfa_required=True,
                 is_verified=True,
                 is_active=True
             )

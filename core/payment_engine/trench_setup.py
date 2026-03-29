@@ -2,6 +2,10 @@ from core.auth.account_checker import account_checker
 from functions.form_sanitizer import sanitize_input
 from database import db
 from functions.user_logs import log_applicant_track
+from models.applications import Applications
+from models.funding import Funding
+from models.contract import ContractAgreement
+from models.trench import TrenchPlan
 import uuid
 
 def trench_plan_maker(officer_id, application_id, trenches, percentage_per_trench):

@@ -1,4 +1,7 @@
 from core.auth.account_checker import account_checker
+from models.applicant_profile import ApplicantProfile
+from models.visit import SiteVisit
+from models.inspection import Inspection
 
 def generate_site_report(applicant_id, visit_id):
     try:

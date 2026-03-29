@@ -2,6 +2,9 @@ from functions.form_sanitizer import sanitize_input
 from datetime import datetime
 from database import db
 from functions.user_logs import log_applicant_track
+from models.employee import Employee
+from models.requirements import Requirements, Categories
+from models.funding_window import FundingWindow
 
 def edit_funding_window(
     user_id,

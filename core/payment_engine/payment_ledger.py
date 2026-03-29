@@ -3,6 +3,9 @@ from functions.user_logs import log_applicant_track
 from core.auth.account_checker import account_checker
 from datetime import datetime
 import uuid
+from models.trench import TrenchPlan
+from models.payment_request import PaymentRequest
+from models.journal import TransactionJournal
 
 def log_payments(officer_id, trench_id):
     try:
@@ -38,7 +41,6 @@ def log_payments(officer_id, trench_id):
             amount=request.amount,
             status='PAID',
             statement='Funds successfully disbursed',
-            created_at=now
         )
 
         db.session.add(transaction)

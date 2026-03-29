@@ -6,13 +6,13 @@ from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 from functions.time_zone_fix import local_now
 
-class FundingWindow(db.Model):
+class TrenchPlan(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    funding_window_id = db.Column(db.String)
-    poster_id = db.Column(db.String)
-    name = db.Column(db.String)
-    description = db.Column(db.Text)
-    funding = db.Column(db.Double)
-    deadline = db.Column(db.String)
+    application_id = db.Column(db.String)
+    officer_id = db.Column(db.String)
+    trench_id = db.Column(db.String)
+    trench = db.Column(db.Integer)
+    percentage = db.Column(db.Double)
+    sequence = db.Column(db.Integer)
     status = db.Column(db.String)
     created_at = db.Column(DateTime(timezone=True), default=local_now)

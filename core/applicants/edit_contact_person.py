@@ -1,6 +1,8 @@
 from database import db
 from functions.form_sanitizer import sanitize_input
 from functions.user_logs import log_applicant_track
+from core.auth.account_checker import account_checker
+from models.contact_person import ContactPersons
 
 """
 Edit contact person
@@ -15,8 +17,7 @@ def edit_contact_person(
 ):
     try:
         #Validate applicant
-        applicant = Applicant.query.filter_by(id=applicant_id).first()
-        if not applicant:
+        if not account_checker(applicant_id):
             return {'message': 'Applicant does not exist'}, 404
 
         #Fetch contact

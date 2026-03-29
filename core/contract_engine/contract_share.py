@@ -2,6 +2,10 @@ from core.auth.account_checker import account_checker
 from functions.file_uploder import file_upload
 from functions.user_logs import log_applicant_track
 from models.contract import ContractAgreement
+from models.applications import Applications
+from models.funding import Funding
+import uuid
+from database import db
 
 """
 Share contract

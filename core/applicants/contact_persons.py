@@ -3,6 +3,9 @@ from functions.form_sanitizer import sanitize_input
 from functions.domain_validation import check_domain
 from functions.user_logs import log_applicant_track
 import uuid
+from models.contact_person import ContactPersons
+from models.applicant import Applicant
+from core.auth.account_checker import account_checker
 
 """
 Add contact persons
@@ -12,10 +15,8 @@ DOMAINS = ["gmail.com", "outlook.com", "yahoo.com"]
 
 def add_contact_person(applicant_id, names_list, emails_list, phone_list, role_list):
     try:
-        # Validate applicant
-        applicant = Applicant.query.filter_by(id=applicant_id).first()
-
-        if not applicant:
+        # Validate applicant        
+        if not account_checker(applicant_id):
             return {'message': 'Applicant does not exist'}, 404
         
         #Default empty lists

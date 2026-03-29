@@ -10,6 +10,7 @@ from flask_mail import Mail, Message
 from mail_util import mail
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from core.auth.email_sender import *
+from models.applicant import Applicant
 
 """
 Applicant Signup

@@ -3,6 +3,8 @@ from database import db
 from functions.registration_number_validator import validate_cipc
 from functions.user_logs import log_applicant_track
 from datetime import datetime
+from core.auth.account_checker import account_checker
+from models.applicant_profile import ApplicantProfile
 
 def edit_applicant_profile(
     applicant_id,
@@ -21,8 +23,7 @@ def edit_applicant_profile(
 ):
     try:
         #Validate applicant
-        applicant = Applicant.query.filter_by(id=applicant_id).first()
-        if not applicant:
+        if not account_checker(applicant_id):
             return {'message': 'Applicant does not exist'}, 404
 
         #Fetch profile
