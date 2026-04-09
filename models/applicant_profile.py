@@ -12,8 +12,8 @@ Applicant Profile
 
 class ApplicantProfile(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    profile = db.Column(db.String)
-    applicant = db.Column(db.String)
+    profile_id = db.Column(db.String)
+    applicant_id = db.Column(db.String)
     legal_name = db.Column(db.String)
     trading_name = db.Column(db.String)
     registration_number = db.Column(db.String)
