@@ -471,3 +471,67 @@ class MakeApplication(Resource):
         )
 
         return result, status_code
+
+@applicants_ns.route("/editProfile")
+class EditProfile(Resource):
+    @applicants_ns.doc(
+        description="Applicant edit's profile.",
+        responses={
+            200:("Profile creacted successfully", create_profile_success_model),
+            400: ("Validation error – missing fields", error_model),
+            409: ("Duplicate email or employee number", error_model),
+            500: ("Internal server error", error_model)
+
+        }
+    )
+    @limiter.limit("10/minute")
+    # @jwt_required()
+    def post(self):
+        """
+        Make Funding Application
+        ------------------
+        """
+        data = request.json
+        result, status = applicant_profile(
+            data.get("applicant_id"),
+            data.get("company_legal_name"),
+            data.get("trading_name"),
+            data.get("registration_number"),
+            data.get("company_type"),
+            data.get("industry"),
+            data.get("seta_affiliation"),
+            data.get("registered_address"),
+            data.get("physical_address"),
+            data.get("city"),
+            data.get("province"),
+            data.get("postal_code"),
+            data.get("country")
+        )
+        return result, status
+
+@applicants_ns.route("/editContactPerson")
+class EditContactPerson(Resource):
+    @applicants_ns.doc(
+        description="Edit contact person.",
+        responses={
+            200: ("Contact person added successfully", contact_person_success_model),
+            400: ("Validation error – missing fields", error_model),
+            409: ("Duplicate email or employee number", error_model),
+            500: ("Internal server error", error_model)
+        }
+    )
+    @applicants_ns.expect(add_contact_person_model, validate=True)
+    @limiter.limit("10 per minute")
+    # @jwt_required()
+    def post(self):
+        data = request.json
+        payload = request.get_json()
+
+        result, status = add_contact_person(
+            applicant_id=payload.get('applicant_id'),
+            names_list=payload.get("names_list"),
+            emails_list=payload.get("emails_list"),
+            phone_list=payload.get("phone_list"),
+            role_list=payload.get('role_list')
+        )
+        return result, status
